@@ -1,0 +1,237 @@
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 20%;
+  height: 100vh;
+  background-color: #ffddae;
+  border-right: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0 20px;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f0f0f0;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar ul li a .icon img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #e0e0e0;
+  color: red;
+}
+
+.sidebar ul li.active a {
+  color: #fff;
+  background-color: #ff6666;
+}
+
+/* Main content styling */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Status button styling */
+.status-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 41px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.status-buttons .btn {
+  padding: 10px 20px;
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.status-buttons .btn.active {
+  background-color: #ff6666;
+  color: #fff;
+}
+
+/* Product list styling */
+.product-list {
+  display: block;
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 15px 0;
+}
+
+.product-item img {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+  border: 1px solid;
+}
+
+/* Product information styling */
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.product-info .status {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.product-info .status.delivered {
+  background-color: #5bc57b;
+  color: #fff;
+  width: 100px;
+  text-align: center;
+}
+
+.product-info .status.cancelled {
+  background-color: #d8d8d8;
+  color: #333;
+}
+
+.product-info .status.in-progress {
+  background-color: #ffd700;
+  color: #333;
+}
+
+.price {
+  font-size: 18px;
+  color: #ff3333;
+  font-weight: bold;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  /* Sidebar chiếm toàn bộ chiều rộng khi màn hình nhỏ hơn 768px */
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Main content chiếm toàn bộ chiều rộng và giảm padding */
+  .main-content {
+    width: 100%;
+    padding: 15px;
+  }
+  /* Cũ: .sidebar ul li a { font-size: 16px; padding: 10px; } */
+  .sidebar ul li a {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  /* Status buttons giảm khoảng cách và padding */
+  .status-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Nút trạng thái có padding nhỏ hơn và chiều rộng linh hoạt */
+  .status-buttons .btn {
+    padding: 8px 16px;
+    min-width: auto;
+  }
+
+  /* Product list width điều chỉnh thành 100% */
+  .product-list {
+    width: 100%;
+    padding: 15px;
+  }
+
+  /* Kích thước ảnh sản phẩm giảm nhỏ để phù hợp với màn hình nhỏ */
+  .product-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Giảm font-size cho tiêu đề sản phẩm */
+  .product-info h3 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Sidebar ul li a font-size và padding nhỏ hơn */
+  .sidebar ul li a {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  /* Product item margin giảm để tối ưu không gian */
+  .product-item {
+    margin: 10px 0;
+  }
+
+  /* Trạng thái sản phẩm font-size và padding giảm nhỏ hơn */
+  .product-info .status {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  /* Giá sản phẩm font-size nhỏ hơn */
+  .price {
+    font-size: 16px;
+  }
+}

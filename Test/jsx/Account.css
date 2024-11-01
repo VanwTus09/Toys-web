@@ -1,0 +1,171 @@
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 20%;
+  height: 100vh;
+  background-color: #ffddae;
+  border-right: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0 20px;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f0f0f0;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sidebar ul li a .icon img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #e0e0e0;
+  color: red;
+}
+
+.sidebar ul li.active a {
+  color: #fff;
+  background-color: #ff6666;
+}
+
+/* Main content styling */
+.main-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Profile styling */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile h2 {
+  font-size: 24px;
+}
+
+/* Info styling */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Update button styling */
+.update-btn {
+  padding: 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 50%;
+  margin: 0 auto; /* Center the button */
+}
+
+.update-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Sidebar full width on small screens */
+    height: auto;
+  }
+
+  .main-content {
+    width: 100%; /* Main content full width on small screens */
+    padding: 15px;
+  }
+
+  .profile img {
+    width: 80px;
+    height: 80px; /* Smaller profile image */
+  }
+
+  .profile h2 {
+    font-size: 20px; /* Smaller font size for name */
+  }
+
+  .sidebar ul li a {
+    font-size: 14px;
+    padding: 8px; /* Reduced font size and padding */
+  }
+
+  .update-btn {
+    padding: 8px; /* Smaller button padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar ul li a {
+    font-size: 12px;
+    padding: 6px; /* Further reduce font size and padding */
+  }
+
+  .profile h2 {
+    font-size: 18px; /* Further reduce font size for name */
+  }
+}

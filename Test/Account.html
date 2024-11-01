@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="Account.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <ul>
+          <li>
+            <a href="User.html">
+              <span class="icon">
+                <img src="icon/home.svg" alt="Home Icon" /> </span
+              >Trang chủ</a
+            >
+          </li>
+          <li class="active">
+            <a href="Account.html"
+              ><span class="icon">
+                <img src="icon/account.svg" alt="Account Icon" /> </span
+              >Tài khoản</a
+            >
+          </li>
+          <li>
+            <a href="BuyHistory.html"
+              ><span class="icon">
+                <img src="icon/buyhistory.svg" alt="BuyHistory Icon" /> </span
+              >Lịch sử mua</a
+            >
+          </li>
+          <!-- <li>
+            <a href="Rank.html"
+              ><span class="icon">
+                <img src="icon/rank.svg" alt="Rank Icon" /> </span
+              >Hạng thành viên</a
+            >
+          </li> -->
+          <li>
+            <a href="Support.html"
+              ><span class="icon">
+                <img src="icon/support.svg" alt="Support Icon" /> </span
+              >Hỗ trợ</a
+            >
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Main content -->
+      <main class="main-content">
+        <div class="profile">
+          <img src="image/Avatar.jpg" alt="Avatar" style="border: 1px solid" />
+          <h2>Mai Xuân Nhân</h2>
+        </div>
+        <div class="info">
+          <label for="name">Họ và tên:</label>
+          <input type="text" id="name" name="name" value="Mai Xuân Nhân" />
+
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value="maixuannhan2004@gmail.com"
+          />
+
+          <label for="phone">Số điện thoại:</label>
+          <input type="text" id="phone" name="phone" value="0868487465" />
+
+          <!-- <label for="dob">Sinh nhật:</label>
+          <input type="date" id="dob" name="dob" value="2023-01-20" /> -->
+
+          <label for="address">Địa chỉ:</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value="xxxxxxxxxxxxxxxxxxxxxxxxxx"
+          />
+
+          <button class="update-btn">Cập nhật thông tin</button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

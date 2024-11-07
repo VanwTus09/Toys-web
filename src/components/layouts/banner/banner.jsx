@@ -1,36 +1,41 @@
 import { IoRocketOutline } from "react-icons/io5";
 import { SlCallEnd } from "react-icons/sl";
 import { LiaBoxOpenSolid } from "react-icons/lia";
-import { SlWallet } from "react-icons/sl";
 
 const Banner = () => {
   return (
-    <div className="py-2 px-10">
-  <div className="flex flex-wrap text-center text-lg">
-    <div className="w-full sm:w-1/2 md:w-1/4 border flex flex-col items-center justify-center p-4">
-      <IoRocketOutline className="text-3xl mb-2" />
-      <h1 className="font-bold">Giao hàng miễn phí</h1>
-      <p>với đơn hàng từ 500k trở lên</p>
-    </div>
-    <div className="w-full sm:w-1/2 md:w-1/4 border flex flex-col items-center justify-center p-4">
-      <SlCallEnd className="text-3xl mb-2" />
-      <h1 className="font-bold">Hỗ trợ 24/7</h1>
-      <p>Hỗ trợ online / offline 24/7</p>
-    </div>
-    <div className="w-full sm:w-1/2 md:w-1/4 border flex flex-col items-center justify-center p-4">
-      <LiaBoxOpenSolid className="text-3xl mb-2" />
-      <h1 className="font-bold">Miễn phí đổi trả</h1>
-      <p>Trong vòng 7 ngày</p>
-    </div>
-    <div className="w-full sm:w-1/2 md:w-1/4 border flex flex-col items-center justify-center p-4">
-      <SlWallet className="text-3xl mb-2" />
-      <h1 className="font-bold">Đặt hàng trực tuyến</h1>
-      <p>Hotline: 0420 420 420</p>
-    </div>
-  </div>
-</div>
+    <div className="py-6 px-10 bg-gray-100">
+      <div className="flex flex-wrap justify-center text-center text-lg">
+        <div className="w-full sm:w-1/2 md:w-1/4 border border-gray-300 rounded-lg shadow-lg m-2 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
+          <div className="flex flex-col items-center justify-center p-4 bg-white rounded-t-lg transition-colors duration-300 ease-in-out hover:bg-blue-50">
+            <IoRocketOutline className="text-4xl text-blue-500 mb-2" />
+            <h1 className="font-bold text-xl text-gray-800">
+              Giao hàng miễn phí
+            </h1>
+            <p className="text-gray-600">với đơn hàng từ 500k trở lên</p>
+          </div>
+        </div>
 
-  )
-}
+        <div className="w-full sm:w-1/2 md:w-1/4 border border-gray-300 rounded-lg shadow-lg m-2 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
+          <div className="flex flex-col items-center justify-center p-4 bg-white rounded-t-lg transition-colors duration-300 ease-in-out hover:bg-green-50">
+            <SlCallEnd className="text-4xl text-green-500 mb-2" />
+            <h1 className="font-bold text-xl text-gray-800">Hỗ trợ 24/7</h1>
+            <p className="text-gray-600">Hỗ trợ online / offline 24/7</p>
+          </div>
+        </div>
 
-export default Banner
+        <div className="w-full sm:w-1/2 md:w-1/4 border border-gray-300 rounded-lg shadow-lg m-2 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
+          <div className="flex flex-col items-center justify-center p-4 bg-white rounded-t-lg transition-colors duration-300 ease-in-out hover:bg-orange-50">
+            <LiaBoxOpenSolid className="text-4xl text-orange-500 mb-2" />
+            <h1 className="font-bold text-xl text-gray-800">
+              Miễn phí đổi trả
+            </h1>
+            <p className="text-gray-600">Trong vòng 7 ngày</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Banner;

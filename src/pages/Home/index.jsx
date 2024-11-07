@@ -7,24 +7,23 @@ import PromotionWrapper from "../../components/layouts/promotion";
 import { useEffect } from "react";
 import axios from "axios";
 import { ProductList } from "../../Product/ProductList";
+import Aboutme from "../../components/layouts/About-us/About";
 const Home = () => {
-  
-  useEffect(() =>{
-   axios.get('https://fakestoreapi.com/')
-   
-  },[])
+  useEffect(() => {
+    axios.get("https://fakestoreapi.com/");
+  }, []);
   return (
     <div>
       <main className="w-full max-w-full">
         <Header />
         <Outlet />
         <Slider />
-        <PromotionWrapper /> 
-        <ProductList/>
+        <PromotionWrapper />
+        <ProductList />
         <Banner />
+        <Aboutme />
         <Footer />
       </main>
-      
     </div>
   );
 };

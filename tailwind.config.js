@@ -5,18 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-<<<<<<< HEAD
-    extend: {},
-  },
-  plugins: [],
-}
-=======
+    darkMode: 'media',
     extend: {
       screens: {
         xs: '500px', // Custom breakpoint for 500px
     },
   },
+  
+    
   plugins: [],
 }}
->>>>>>> update-main
-

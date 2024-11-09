@@ -29,12 +29,12 @@
 + Tổng kết lại những gì đã đạt được, xác định những điểm cần cải thiện và đưa ra hướng phát triển trang web trong tương lai.
 - Đề xuất và hướng phát triển tiếp theo
 + Đưa ra các ý tưởng phát triển, như tính năng theo dõi đơn hàng, hoặc nâng cấp trải nghiệm mua sắm.
-#Mục tiêu
+# Mục tiêu
 - Trang web Nutri Toys được nhóm chúng em nghiên cứu và phát triển nhằm thỏa mãn nhu cầu sở hữu mô hình hoạt hình được kết hợp từ hai nhu cầu chúng em nhắc ở phía trên kết hợp lại
 Nutri Toys có giao diện đơn giản nhưng hiện đại, phù hợp với xu thế và giới trẻ hiện nay, có các chức năng cơ bản dành cho người dùng, khách hàng để họ có thể chọn lựa và mua sắm. Thông tin sản phẩm được hiển thị, trình bày rõ ràng, rành mạch, thuận tiện cho người có thể theo dõi. 
 - Bên cạnh đó, Nutri Toys cũng hỗ trợ người bán (shop, công ty) theo dõi quá trình hàng hóa, tổng doanh thu từ những sản phẩm bán ra, thu thập thông tin khách hàng và lữu trữ những thông tin quan trọng về khách hàng cũng như hàng hóa để xử lý kịp thời.
 - Đặc biệt nhất là Nutri Toys hỗ trợ người bán (shop, công ty) đặt hàng từ xa, nhằm cạnh tranh với những đối thủ trong thời đại 4.0 này, nơi mà nơi đâu cũng có giao hàng toàn quốc. Từ đó tối ưu hóa trải nghiệm mua sắm của khách hàng cũng như công tác kinh doanh của người bán (shop, công ty).
-#Tác giả
+# Tác giả
 - Mai Xuân Nhân - https://github.com/Mai-Xuan-Nhan
 - Nguyễn Văn Tú - https://github.com/VanwTus09
 - Trần Hải Dương - https://github.com/TTTHaiDuong

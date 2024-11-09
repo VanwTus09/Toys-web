@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import Price from "./Price";
-import Rating from "./Rating";
+// import Rating from "./Rating";
 import Category from "./Category";
 
 const ProductFilters = ({
-  products,
-  onFilterByCategory,
-  onFilterByPrice,
-  onFilterByRating,
+  allProducts,
+  onChangeFormField,
+  filterForm,
+  handleFilterProducts,
 }) => {
   const [toggleFilters, setToggleFilters] = useState(false);
 
@@ -32,21 +32,36 @@ const ProductFilters = ({
         <div className="mt-[20px] border-b pb-[15px] w-full">
           <p className="pb-[20px] text-lg font-medium">Category</p>
           <Category
-            products={products}
-            onFilterByCategory={onFilterByCategory}
+            allProducts={allProducts}
+            filterForm={filterForm}
+            onChangeFormField={onChangeFormField}
           />
         </div>
-        <div className="w-full mt-[20px] border-b pb-[15px]">
+        <div className="w-full mt-[20px] pb-[15px]">
           <p className="pb-[20px] text-lg font-medium">Price</p>
-          <Price onFilterByPrice={onFilterByPrice} />
+          <Price
+            filterForm={filterForm}
+            onChangeFormField={onChangeFormField}
+          />
         </div>
-        <div className="w-full mt-[20px] border-b pb-[15px]">
+        {/* <div className="w-full mt-[20px] pb-[15px]">
           <p className="pb-[20px] text-lg font-medium">Rating</p>
           <div className="flex flex-col">
-            <Rating products={products} onFilterByRating={onFilterByRating} />
+            <Rating
+              filterForm={filterForm}
+              onChangeFormField={onChangeFormField}
+            />
           </div>
-        </div>
+        </div> */}
       </div>
+      {toggleFilters && (
+        <button
+          className="border px-2 uppercase rounded h-[30px] bg-black text-white hover:bg-gray-600 transition cursor-pointer"
+          onClick={handleFilterProducts}
+        >
+          Filter
+        </button>
+      )}
     </>
   );
 };

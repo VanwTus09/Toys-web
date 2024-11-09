@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { getAllProducts } from "../../api/Productsapi";
+import { Context } from "../../context/context";
+import { convertBase64toURL } from "../../utils/common";
 
 const Payment = () => {
+  const { cart } = useContext(Context);
+
   const [cartItems, setCartItems] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -17,8 +22,25 @@ const Payment = () => {
   });
 
   useEffect(() => {
-    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(savedCartItems);
+    if (cart?.length) {
+      getAllProducts().then((resp) => {
+        const products = resp?.products;
+        const _cartItems = cart.map((item) => {
+          const product = products.find(
+            (product) => product._id === item.productId
+          );
+          return {
+            ...product,
+            quantity: item?.quantity || 1,
+            cartId: item?._id,
+          };
+        });
+        setCartItems(_cartItems);
+      });
+    }
+  }, [cart]);
+
+  useEffect(() => {
     fetchProvinces();
   }, []);
 
@@ -88,7 +110,7 @@ const Payment = () => {
   return (
     <div className="flex flex-col md:flex-row p-6 bg-gray-100">
       {/* Phần nhập thông tin khách hàng */}
-      <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+      <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md h-fit">
         <h2 className="text-2xl font-bold mb-4">Thông tin khách hàng</h2>
 
         {/* Các trường nhập thông tin */}
@@ -189,24 +211,33 @@ const Payment = () => {
       {/* Phần hiển thị giỏ hàng và thông tin đơn hàng */}
       <div className="w-full md:w-1/2 p-6">
         <h2 className="text-2xl font-bold mb-4">Giỏ hàng</h2>
-        {cartItems.map((item) => (
-          <div key={item.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
-            <div className="flex items-center mb-4">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-20 h-20 rounded-lg border mr-4"
-              />
-              <div>
-                <h3 className="text-lg font-bold">{item.name}</h3>
-                <p className="text-red-500 font-bold">
-                  {(item.price * item.quantity).toLocaleString()}đ
-                </p>
-                <p className="text-gray-500">Số lượng: {item.quantity}</p>
+        {[...cartItems, ...cartItems, ...cartItems, ...cartItems].map(
+          (item) => (
+            <div
+              key={item.id}
+              className="bg-white p-4 rounded-lg shadow-md mb-4"
+            >
+              <div className="flex items-center mb-4">
+                <img
+                  src={
+                    item?.images?.length
+                      ? convertBase64toURL(item?.images[0]?.buffer)
+                      : ""
+                  }
+                  alt={item.name}
+                  className="w-20 h-20 rounded-lg border mr-4"
+                />
+                <div>
+                  <h3 className="text-lg font-bold">{item.name}</h3>
+                  <p className="text-red-500 font-bold">
+                    {(item.price * item.quantity).toLocaleString()}đ
+                  </p>
+                  <p className="text-gray-500">Số lượng: {item.quantity}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
           <h3 className="text-lg font-bold">
             Tổng tiền: {calculateTotal().toLocaleString()}đ

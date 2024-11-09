@@ -1,26 +1,20 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../../context/context";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getProduct } from "../../api/Productsapi";
 import ReviewForm from "../Review/ReviewForm";
 import { convertBase64toURL } from "../../utils/common";
 import { createCart } from "../../api/CartApi";
 import RelatedProducts from "../layouts/Recommended/RelatedProducts";
 
 const ProductDetailItem = ({ product }) => {
-  const id = useParams();
-  const { cart, setCart } = useContext(Context); // Sử dụng context để lấy giỏ hàng
-  
+  const { user, cart, setCart, handleGetCarts } = useContext(Context); // Sử dụng context để lấy giỏ hàng
+
   // const [relatedProducts, setRelatedProducts] = useState([]);
   // const [ setError] = useState(null);
-  useEffect(() => {
-    getProduct(id).then((response) => {
-      console.log(response);
-    });
-  }, [id]);
+
   const countStar = (rating) => {
     const arr = [];
     const ratingRound = Math.round(rating);
@@ -33,12 +27,19 @@ const ProductDetailItem = ({ product }) => {
   };
 
   const addProductToCart = async () => {
+    if (cart?.length) {
+      const existedProduct = cart.find(
+        (item) => item.productId === product._id
+      );
+      if (existedProduct) return alert("Sản phẩm đã tồn tại trong giỏ hàng.");
+    }
     setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
-    const response = await createCart("userId", product._id, 1);
-    console.log(response);
+    const response = await createCart(user?._id, product._id, 1);
+    if (response) {
+      handleGetCarts();
+    }
   };
 
-  console.log("cart: ", cart);
   return (
     <div className="px-2 pt-6">
       <p className="capitalize text-gray-500 mb-6 text-base font-semibold sm:text-base bg-gray-200 ">
@@ -59,7 +60,7 @@ const ProductDetailItem = ({ product }) => {
           <div className="flex justify-center items-center lg:w-9/12">
             <img
               className="w-full lg:w-45/8 object-contain transform transition-transform duration-300 hover:scale-125"
-              src={convertBase64toURL(product.images[0].buffer)}
+              src={convertBase64toURL(product?.images[0]?.buffer)}
               alt={product.name || "Product image"}
             />
           </div>

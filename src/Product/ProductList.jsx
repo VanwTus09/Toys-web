@@ -20,7 +20,7 @@ const ProductList = () => {
       <h1 className="text-3xl font-bold text-center my-6">Sản phẩm của tôi</h1>
       <div className="flex flex-wrap justify-between">
         {products.map((product) => (
-          <ProductItem {...product} key={product.id} />
+          <ProductItem product={product} key={product.id} />
         ))}
       </div>
     </div>

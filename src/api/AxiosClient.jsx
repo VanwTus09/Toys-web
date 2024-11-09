@@ -6,6 +6,18 @@ const axiosClient = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const setRestAuth = (token) => {
+  if (token) {
+    axiosClient.defaults.headers.common["Authorization"] = `Basic ${token}`;
+  }
+};
+
+export const deleteAuthorization = () => {
+  delete axiosClient.defaults.headers.common.Authorization;
+  delete axiosClient.defaults.headers.common["Authorization"];
+};
+
 // interceptors (kiểm tra resquest và response)
 // Add a request interceptor
 axios.interceptors.request.use(

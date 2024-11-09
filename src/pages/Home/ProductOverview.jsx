@@ -11,9 +11,7 @@ const ProductOverview = () => {
   const param = useParams();
 
   useEffect(() => {
-    console.log(param);
     getProduct(param.id).then((response) => {
-      console.log(response);
       setProduct(response.product);
     });
   }, [param]);

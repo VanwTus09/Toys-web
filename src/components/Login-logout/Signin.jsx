@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { signIn } from "../../api/Auth";
 import { Context } from "../../context/context";
 import { useNavigate } from "react-router-dom";
+import { setRestAuth } from "../../api/AxiosClient";
 
 const Signin = () => {
   const { setUser } = useContext(Context);
@@ -22,9 +23,15 @@ const Signin = () => {
   const handleSignIn = async () => {
     const { email, password } = signInForm;
     const response = await signIn(email, password);
-    setUser(response?.user);
-    alert("Bạn đã đăng nhập thành công");
-    navigate("/");
+    console.log(response);
+    localStorage.setItem("accessToken", response?.accessToken);
+    setRestAuth();
+    if (response.user) {
+      setUser(response.user);
+      localStorage.setItem("user_id", response.user._id);
+      alert("Bạn đã đăng nhập thành công");
+      navigate("/");
+    }
   };
 
   return (

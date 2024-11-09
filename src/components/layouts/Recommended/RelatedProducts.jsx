@@ -1,45 +1,35 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import axios from "axios"; // Đảm bảo bạn đã import axios
-import ProductDetailItem from "../../Products-detailItems/ProductDetailItems";
+import { getAllProducts } from "../../../api/Productsapi";
+import ProductItem from "../productItems/ProductItem";
 
 const RelatedProducts = ({ product }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [error, setError] = useState(null);
-
+  const [error, ] = useState(null);
+  console.log(product);
   // Lấy các sản phẩm liên quan từ API
+  // useEffect(() => {
+  //
+  // }, [product]);
+
   useEffect(() => {
-    if (product?.category) {
-      const fetchRelatedProducts = async () => {
-        try {
-          // Gửi request đến API để lấy tất cả các sản phẩm
-          const response = await axios.get(
-            `https://toy-kingdom-backend.onrender.com/product/findAll/${product.category}`
+    if (product) {
+      getAllProducts().then((resp) => {
+        if (Array.isArray(resp?.products)) {
+          // Lọc các sản phẩm có cùng category và loại trừ sản phẩm chính
+          const filteredProducts = resp.products.filter(
+            (item) =>
+              item.category === product.category && item._id !== product._id
           );
-
-          // Kiểm tra cấu trúc dữ liệu trả về từ API
-          console.log(response.data); // In dữ liệu ra console để kiểm tra
-
-          // Kiểm tra nếu response.data là mảng
-          if (Array.isArray(response.data)) {
-            // Lọc các sản phẩm có cùng category và loại trừ sản phẩm chính
-            const filteredProducts = response.data.filter(
-              (item) =>
-                item.category === product.category && item._id !== product._id
-            );
-            setRelatedProducts(filteredProducts);
-          } else {
-            setError("Dữ liệu trả về không phải là mảng");
-          }
-        } catch (error) {
-          setError("Error fetching related products: " + error.message);
+          console.log(filteredProducts);
+          setRelatedProducts(filteredProducts);
         }
-      };
-
-      fetchRelatedProducts();
+      });
     }
-  }, [product]); // useEffect sẽ chạy lại khi product thay đổi
+  }, [product]);
 
+  // useEffect sẽ chạy lại khi product thay đổi
+  console.log(relatedProducts);
   if (error) {
     return <p className="text-center text-red-500">{error}</p>;
   }
@@ -50,10 +40,7 @@ const RelatedProducts = ({ product }) => {
       <div className="flex flex-wrap justify-center mt-4">
         {relatedProducts.length > 0 ? (
           relatedProducts.map((relatedProduct) => (
-            <ProductDetailItem
-              key={relatedProduct._id}
-              product={relatedProduct}
-            />
+            <ProductItem key={relatedProduct._id} product={relatedProduct} />
           ))
         ) : (
           <p className="text-center text-gray-500">

@@ -1,46 +1,53 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { convertBase64toURL } from "../../../utils/common";
 
-const CartItem = ({ item, setCart }) => {
+const CartItem = ({ item, setCart, handleDeleteCart, handleUpdateCart }) => {
+  console.log(item);
   const sum = item.price * item.quantity;
-
-  const incrementProductInCart = (id) => {
+  console.log({ sum });
+  const incrementProductInCart = async (cartId, quantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item._id === cartId ? { ...item, quantity } : item
       )
     );
+    await handleUpdateCart(cartId, quantity);
   };
 
-  const decrementProductInCart = (id) => {
+  const decrementProductInCart = async (cartId, quantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item._id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
+        item._id === cartId ? { ...item, quantity } : item
       )
     );
+    await handleUpdateCart(cartId, quantity);
   };
 
-  const removeItemFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item._id !== id));
+  const removeItemFromCart = (cartId) => {
+    setCart((prevCart) => prevCart.filter((item) => item._id !== cartId));
+    handleDeleteCart([cartId]);
   };
+
   return (
     <div className="py-4 px-2 sm:px-4 border-b">
       <div className="flex justify-between">
         <div className="flex">
           <img
             className="w-[60px]"
-            src={convertBase64toURL(item.images[0].buffer)}
+            src={
+              item?.images?.length
+                ? convertBase64toURL(item?.images[0]?.buffer)
+                : ""
+            }
             alt={item.name}
           />
           <span className="pl-3 pt-2 text-sm sm:text-lg">{item.name}</span>
         </div>
         <button
           className="h-fit pt-2 cursor-pointer"
-          onClick={() => removeItemFromCart(item.id)}
+          onClick={() => removeItemFromCart(item.cartId)}
         >
           <FontAwesomeIcon
             icon={faTrashCan}
@@ -56,7 +63,9 @@ const CartItem = ({ item, setCart }) => {
           <button
             className={item.quantity > 1 ? "text-[#3e77aa]" : "text-black"}
             disabled={item.quantity <= 1}
-            onClick={() => decrementProductInCart(item._id)}
+            onClick={() =>
+              decrementProductInCart(item.cartId, item.quantity - 1)
+            }
           >
             <FontAwesomeIcon icon={faMinus} />
           </button>
@@ -65,7 +74,9 @@ const CartItem = ({ item, setCart }) => {
           </span>
           <button
             className="text-[#3e77aa]"
-            onClick={() => incrementProductInCart(item._id)}
+            onClick={() =>
+              incrementProductInCart(item.cartId, item.quantity + 1)
+            }
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>

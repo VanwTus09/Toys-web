@@ -27,4 +27,15 @@ const signIn = async (email, password) => {
   }
 };
 
-export { signUp, signIn };
+const getUser = async (userId) => {
+  try {
+    const response = await axiosClient.get(`/registered/profile?_id=${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("API call failed:", error);
+    throw error;
+  }
+};
+
+
+export { signUp, signIn,getUser };

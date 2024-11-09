@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/toys-web/',  // Đảm bảo base path đúng với cấu trúc URL trên Vercel
   publicDir: false, // Bỏ qua thư mục public .git
   build: {
     outDir: 'dist', // Thư mục xuất ra

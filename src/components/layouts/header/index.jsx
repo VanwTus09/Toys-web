@@ -89,11 +89,7 @@ const Header = () => {
           href="/"
           className="flex items-center justify-center w-20 min-w-20 h-full -mb-2 mx-auto md:mx-0"
         >
-          <img
-            className="object-cover w-full"
-            src="/public/logo.jpg"
-            alt="logo"
-          />
+          <img className="object-cover w-full" src="/logo.jpg" alt="logo" />
         </a>
         {/* Nav chỉ hiển thị trên màn hình lớn */}
         <div className="hidden md:flex h-full flex-1 items-center justify-between gap-4">

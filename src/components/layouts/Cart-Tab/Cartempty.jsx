@@ -3,7 +3,7 @@ export function CartEmpty() {
     <div className="text-center">
       <img
         className="w-[300px] h-[280px] m-auto sm:h-[300px]"
-        src={"/public/empty.png"}
+        src={"/empty.png"}
         alt="cart empty"
       />
       <p className="text-2xl">Giỏ hàng đang trống !</p>

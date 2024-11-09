@@ -1,7 +1,10 @@
-#Bộ môn : Phát triển ứng dụng web
-#Đề tài : DỰ ÁN XÂY DỰNG TRANG WEB BÁN MÔ HÌNH ĐỒ CHƠI
-#Mô tả và mục tiêu dự án
-#Mô tả
+# Bộ môn : Phát triển ứng dụng web
+
+# Đề tài : DỰ ÁN XÂY DỰNG TRANG WEB BÁN MÔ HÌNH ĐỒ CHƠI
+
+# Mô tả và mục tiêu dự án
+
+# Mô tả
 Để xây dựng một trang web bán mô hình đồ chơi, nhóm chúng em đã họp, bàn bạc với nhau để đưa ra phương pháp thực hiện một cách chỉn chủ. Dưới đây là quy trình chi tiết:
 - Tìm hiểu yêu cầu của trang web thương mại điện tử cho mô hình đồ chơi
 + Xác định các tính năng cần có như danh mục sản phẩm, giỏ hàng, thanh toán trực tuyến, quản lý tài khoản người dùng, và khả năng tìm kiếm sản phẩm.
@@ -32,10 +35,10 @@ Nutri Toys có giao diện đơn giản nhưng hiện đại, phù hợp với x
 - Bên cạnh đó, Nutri Toys cũng hỗ trợ người bán (shop, công ty) theo dõi quá trình hàng hóa, tổng doanh thu từ những sản phẩm bán ra, thu thập thông tin khách hàng và lữu trữ những thông tin quan trọng về khách hàng cũng như hàng hóa để xử lý kịp thời.
 - Đặc biệt nhất là Nutri Toys hỗ trợ người bán (shop, công ty) đặt hàng từ xa, nhằm cạnh tranh với những đối thủ trong thời đại 4.0 này, nơi mà nơi đâu cũng có giao hàng toàn quốc. Từ đó tối ưu hóa trải nghiệm mua sắm của khách hàng cũng như công tác kinh doanh của người bán (shop, công ty).
 #Tác giả
-- Mai Xuân Nhân - 
-- Nguyễn Văn Tú
-- Trần HẢi Dương
-- Nguyễn Hoàng Huy
+- Mai Xuân Nhân - https://github.com/Mai-Xuan-Nhan
+- Nguyễn Văn Tú - https://github.com/VanwTus09
+- Trần Hải Dương - https://github.com/TTTHaiDuong
+- Nguyễn Hoàng Huy - https://github.com/xenn34
 # Kiến thức áp dụng
 - Ngôn ngữ và Công nghệ sử dụng:
 + Frontend:

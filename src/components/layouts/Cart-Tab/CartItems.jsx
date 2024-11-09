@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { convertBase64toURL } from "../../../utils/common";
 

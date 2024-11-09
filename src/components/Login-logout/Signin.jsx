@@ -1,4 +1,30 @@
+import { useContext, useState } from "react";
+import { signIn } from "../../api/Auth";
+import { Context } from "../../context/context";
+import { Link } from "react-router-dom";
+
 const Signin = () => {
+  const { setUser } = useContext(Context);
+
+  const [signInForm, setSignInForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onChangeFormField = (value, field) => {
+    setSignInForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSignIn = async () => {
+    const { email, password } = signInForm;
+    const response = await signIn(email, password);
+    setUser(response?.user);
+    alert("Bạn đã đăng nhập thành công");
+  };
+
   return (
     <section className="text-center relative  ">
       <div className="bg-gray-50 dark:bg-gray-900 ">
@@ -16,6 +42,8 @@ const Signin = () => {
               <input
                 type="email"
                 id="email"
+                value={signInForm.email}
+                onChange={(e) => onChangeFormField(e.target.value, "email")}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="name@gmail.com"
                 required
@@ -31,6 +59,8 @@ const Signin = () => {
               <input
                 type="password"
                 id="password"
+                value={signInForm.password}
+                onChange={(e) => onChangeFormField(e.target.value, "password")}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
               />
@@ -51,12 +81,15 @@ const Signin = () => {
                 Remember me
               </label>
             </div>
-            <button
-              type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Submit
-            </button>
+            <Link to={"/"}>
+              <button
+                onClick={handleSignIn}
+                type="submit"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Submit
+              </button>
+            </Link>
             <p className="p-2">
               Bạn chưa có tài khoản ? Đăng kí tại{" "}
               <a href="/Signup" className="font-bold">

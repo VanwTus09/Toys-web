@@ -10,7 +10,7 @@ import { ProductList } from "../../Product/ProductList";
 import Aboutme from "../../components/layouts/About-us/About";
 const Home = () => {
   useEffect(() => {
-    axios.get("https://fakestoreapi.com/");
+    axios.get("http://localhost:8080");
   }, []);
   return (
     <div>
@@ -18,9 +18,9 @@ const Home = () => {
         <Header />
         <Outlet />
         <Slider />
-        <PromotionWrapper />
         <ProductList />
         <Banner />
+        <PromotionWrapper />
         <Aboutme />
         <Footer />
       </main>

@@ -1,6 +1,7 @@
 import axios from "axios";
 const axiosClient = axios.create({
-  baseURL: "https://fakestoreapi.com",
+  baseURL: "https://toy-kingdom-backend.onrender.com",
+  // baseURL: "http://localhost:8080",
   header: {
     "Content-Type": "application/json",
   },

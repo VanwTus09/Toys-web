@@ -1,25 +1,22 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Productsapi from "../../api/Productsapi";
 import ProductDetailItem from "../../components/Products-detailItems/ProductDetailItems";
 import Header from "../../components/layouts/header";
 import Footer from "../../components/layouts/footer";
+import { getProduct } from "../../api/Productsapi";
+import { useParams } from "react-router-dom";
 
 const ProductOverview = () => {
-  const { id } = useParams(); // Lấy id từ URL
   const [product, setProduct] = useState(null); // Trạng thái để lưu sản phẩm
-  const [error, setError] = useState(null); // Trạng thái để lưu lỗi
+  const [error] = useState(null); // Trạng thái để lưu lỗi
+  const param = useParams();
 
   useEffect(() => {
-    // Gọi API để lấy sản phẩm theo id
-    Productsapi.get(id)
-      .then((response) => {
-        setProduct(response.data); // Lưu sản phẩm vào state
-      })
-      .catch((error) => {
-        setError(error.message); // Xử lý lỗi
-      });
-  }, [id]);
+    console.log(param);
+    getProduct(param.id).then((response) => {
+      console.log(response);
+      setProduct(response.product);
+    });
+  }, [param]);
 
   if (error) {
     return <p>Lỗi: {error}</p>; // Hiển thị lỗi nếu có
@@ -31,9 +28,9 @@ const ProductOverview = () => {
 
   return (
     <div>
-      <Header/> 
-      <ProductDetailItem product={(product)}/>
-      <Footer/>
+      <Header />
+      <ProductDetailItem product={product} />
+      <Footer />
     </div>
   );
 };

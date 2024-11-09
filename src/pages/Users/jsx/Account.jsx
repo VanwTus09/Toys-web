@@ -1,10 +1,29 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Account() {
+  // Trạng thái để theo dõi sidebar có đang mở trên mobile không
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  // Hàm để toggle sidebar
+  const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+
   return (
-    <div className="flex w-full bg-gray-100">
+    <div className="flex flex-col md:flex-row w-full bg-gray-100">
+      {/* Nút mở menu cho mobile */}
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden p-2 bg-orange-200 text-gray-800 font-bold"
+      >
+        ☰ Menu
+      </button>
+
       {/* Sidebar */}
-      <aside className="w-1/5 h-screen bg-orange-200 border-r border-gray-300 pt-5">
+      <aside
+        className={`${
+          isSidebarOpen ? "block" : "hidden"
+        } md:block w-full md:w-1/5 h-screen bg-orange-200 border-r border-gray-300 pt-5 fixed md:static z-10`}
+      >
         <ul className="list-none px-5">
           <li>
             <Link
@@ -70,7 +89,7 @@ function Account() {
       </aside>
 
       {/* Main content */}
-      <main className="flex flex-col w-full p-5 bg-gray-50">
+      <main className="flex flex-col w-full p-5 bg-gray-50 md:w-4/5">
         <div className="flex flex-col items-center mb-5">
           <img
             src="image/Avatar.jpg"
@@ -79,7 +98,7 @@ function Account() {
           />
           <h2 className="text-2xl mt-2">Mai Xuân Nhân</h2>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 w-full max-w-lg mx-auto">
           <label htmlFor="name" className="font-bold">
             Họ và tên:
           </label>
@@ -124,7 +143,7 @@ function Account() {
             className="w-full p-2 border border-gray-300 rounded-md"
           />
 
-          <button className="w-1/2 mx-auto p-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+          <button className="w-full md:w-1/2 mx-auto p-2 bg-red-500 text-white rounded-md hover:bg-red-600">
             Cập nhật thông tin
           </button>
         </div>

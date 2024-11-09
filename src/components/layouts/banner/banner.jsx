@@ -4,8 +4,13 @@ import { LiaBoxOpenSolid } from "react-icons/lia";
 
 const Banner = () => {
   return (
-    <div className="py-6 px-10 bg-gray-100">
-      <div className="flex flex-wrap justify-center text-center text-lg">
+    <div className="py-6 px-10  ">
+      <img src="/banner_1.jpg" alt="banner" className="p-2" />
+      <h1 className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 shadow-lg animate-pulse">
+        HÃY ĐỂ CHÚNG TÔI LÀ BẠN ĐỒNG HÀNH CỦA TRẺ NHỎ
+      </h1>
+
+      <div className="flex flex-wrap justify-center text-center text-lg bg-slate-100">
         <div className="w-full sm:w-1/2 md:w-1/4 border border-gray-300 rounded-lg shadow-lg m-2 transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out">
           <div className="flex flex-col items-center justify-center p-4 bg-white rounded-t-lg transition-colors duration-300 ease-in-out hover:bg-blue-50">
             <IoRocketOutline className="text-4xl text-blue-500 mb-2" />

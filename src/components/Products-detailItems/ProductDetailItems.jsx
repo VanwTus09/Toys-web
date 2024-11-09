@@ -1,40 +1,25 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { useContext, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../../context/context";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import optionsProduct from "../../constants/constants"
+import { getProduct } from "../../api/Productsapi";
+import ReviewForm from "../Review/ReviewForm";
+import { convertBase64toURL } from "../../utils/common";
+import { createCart } from "../../api/CartApi";
+import RelatedProducts from "../layouts/Recommended/RelatedProducts";
 
 const ProductDetailItem = ({ product }) => {
-  const { setCart } = useContext(Context); // Sử dụng context để lấy giỏ hàng
-  const [relatedProducts, setRelatedProducts] = useState([]);
-  const [error, setError] = useState(null);
-  const isCart = true; // hoặc giá trị cần thiết
-  <ProductDetailItem isCart={true} />;
-
+  const id = useParams();
+  const { cart, setCart } = useContext(Context); // Sử dụng context để lấy giỏ hàng
+  // const [relatedProducts, setRelatedProducts] = useState([]);
+  // const [ setError] = useState(null);
   useEffect(() => {
-    console.log(product); // Thêm dòng này để kiểm tra dữ liệu product
-  }, [product]);
-  // Lấy các sản phẩm liên quan
-  useEffect(() => {
-    const fetchRelatedProducts = async () => {
-      try {
-        const response = await axios.get(
-          `https://fakestoreapi.com/products/category/${product.category}`
-        );
-        const filteredProducts = response.data.filter(
-          (item) => item.id !== product.id
-        );
-        setRelatedProducts(filteredProducts);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchRelatedProducts();
-  }, [product]);
+    getProduct(id).then((response) => {
+      console.log(response);
+    });
+  }, [id]);
   const countStar = (rating) => {
     const arr = [];
     const ratingRound = Math.round(rating);
@@ -46,95 +31,80 @@ const ProductDetailItem = ({ product }) => {
     ));
   };
 
-  const addProductToCart = () => {
-    setCart((prevCart) => [...prevCart, product]);
-  };
-  const ClickHandle = (productId) => {
-    Context.id = productId;
+  const addProductToCart = async () => {
+    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    const response = await createCart("userId", product._id, 1);
+    console.log(response);
   };
 
+  console.log("cart: ", cart);
   return (
     <div className="px-2 pt-6">
-      <p className="capitalize text-gray-500 mb-6 text-sm font-semibold sm:text-base bg-gray-200">
-        <Link to="/" className="transition hover:border-b-2 border-b-gray-500">
+      <p className="capitalize text-gray-500 mb-6 text-base font-semibold sm:text-base bg-gray-200 ">
+        <Link
+          to="/"
+          className="transition hover:border-b-2 border-b-gray-500 ml-10"
+        >
           Home
         </Link>
         <span className="px-2">/</span>
-        {product.category}
-        <span className="pl-2">/</span>
+        <Link to={`/category/${product.category}`}> {product.category}</Link>
+        <span className="pl-2">/ </span>
+        {product.name}
       </p>
       <div className="flex flex-col justify-center items-center lg:flex lg:flex-row lg:justify-between lg:items-start">
-        <div className="w-full shadow-lg rounded-md flex justify-center items-center lg:w-2/4 sm:w-3/4">
-          <img
-            className="w-2/4 lg:w-5/8"
-            src={product.image}
-            alt={product.title}
-          />
+        <div className="w-full   flex flex-col lg:flex-row justify-center items-center lg:w-2/4 sm:w-3/4">
+          {/* Hình ảnh chính */}
+          <div className="flex justify-center items-center   lg:w-9/12">
+            <img
+              className="w-full lg:w-45/8 object-cotain"
+              src={convertBase64toURL(product.images[0].buffer)}
+              alt={product.name || "Product image"}
+            />
+          </div>
         </div>
+        {/* Thông tin sản phẩm và hình ảnh phụ */}
         <div className="w-full pl-0 sm:w-3/4 lg:w-2/4 lg:pl-[30px]">
           <div>
             <p className="font-medium text-xl mt-5 lg:mt-0 md:text-2xl">
-              {product.title}
+              {product.name}
             </p>
-            <p className="my-4 text-xl sm:text-2xl">${product.price}</p>
-            <div className="flex justify-start">
-              <div className="mr-4">
-                <span className="mr-2 text-base font-semibold">
-                  {product.rating.rate}
-                </span>
-                {countStar(product.rating.rate)}
-              </div>
-              <span className="cursor-pointer text-indigo-600 text-base font-medium hover:text-indigo-500 transition">
-                {product.rating.count} reviews
-              </span>
-            </div>
-            <p className="text-base mt-4 sm:text-lg">{product.description}</p>
-            <div className="my-4"></div>
+            <p className="my-4 text-xl sm:text-2xl">
+              {product.price.toLocaleString()} VND
+            </p>
+            <p className="text-base mt-4 sm:text-lg text-blue-500 font-semibold transition duration-300 transform hover:text-red-500 hover:scale-105 hover:shadow-lg p-2">
+              {countStar(product.rating)}
+            </p>
+            <p className="text-base mt-4 sm:text-lg text-blue-500 font-semibold transition duration-300 transform hover:text-red-500 hover:scale-105 hover:shadow-lg p-2">
+              {product.totalReviews} reviews
+            </p>
+            <p className="text-base mt-4 sm:text-lg text-blue-500 font-semibold transition duration-300 transform hover:text-red-500 hover:scale-105 hover:shadow-lg p-2">
+              Stock: {product.stock}
+            </p>
+            <p className="text-base mt-4 sm:text-lg text-blue-500 font-semibold transition duration-300 transform hover:text-red-500 hover:scale-105 hover:shadow-lg p-2">
+              Suitable_AGE: {product.suitableAge}
+            </p>
+
+            <div className="p-2"></div>
             <button
               onClick={addProductToCart}
-              disabled={isCart}
-              className={`w-full bg-black mt-8 text-md rounded-md text-white transition px-[80px] py-[15px] sm:text-lg md:w-fit ${
-                isCart ? "border px-[40px] py-[10px]" : "hover:bg-gray-800"
-              }`}
+              className="w-full bg-[#af041e] mt-2 text-md text-white transition sm:text-lg md:text-lg border border-transparent hover:border-red-500 hover:bg-white hover:text-gray-500 px-4 py-2 rounded"
             >
-              Add to cart
+              THÊM VÀO GIỎ
             </button>
+          </div>
+          <div className="p-2 text-sm">
+            <h1 className="text-base font-bold ">Mô tả</h1>
+            {product.description}
           </div>
         </div>
       </div>
+      <ReviewForm />
       <div className="mt-[100px]">
-        <p className="text-xl font-medium w-fit border-b-2 border-b-gray-500 mx-auto lg:mx-0">
-          You may also be interested
+        <p className="text-xl font-medium w-fit border-b-2 border-b-gray-500 mx-auto items-center justify-center">
+          Related Products
         </p>
-        <div
-          className={`flex justify-start mt-8 overflow-x-auto lg:overflow-x-hidden ${
-            relatedProducts.length > 3
-              ? "lg:justify-center"
-              : "sm:justify-center"
-          }`}
-        >
-          {error && <div className="text-red-500">{error}</div>}
-          {relatedProducts.map((relatedProduct) => (
-            <Link
-              to={`/products/${relatedProduct.id}`}
-              key={relatedProduct.id}
-              onClick={() => ClickHandle(relatedProduct.id)}
-              className="flex flex-col justify-evenly items-center border mx-1 py-1 rounded-lg shadow-lg productItem"
-            >
-              <img
-                className="w-[100px]"
-                src={relatedProduct.image}
-                alt={relatedProduct.title}
-              />
-              <div>
-                <p className="w-[200px] text-center">{relatedProduct.title}</p>
-                <p className="font-medium text-center">
-                  ${relatedProduct.price}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <RelatedProducts product={product || []} />
       </div>
     </div>
   );

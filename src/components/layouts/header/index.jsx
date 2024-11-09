@@ -70,9 +70,12 @@ const Header = () => {
   return (
     <header>
       {/* Thông báo trên đầu trang */}
-      <h1 className="text-center p-1 text-white bg-black">
-        Miễn phí vận chuyển với đơn hàng trên 500K. Hàng pre-order còn được giảm thêm 5%.
-      </h1>
+      <div className="marquee overflow-hidden whitespace-nowrap text-center p-1 text-white bg-black ">
+        <h1 className="inline-block animate-marquee">
+          Miễn phí vận chuyển với đơn hàng trên 500K. Hàng pre-order còn được
+          giảm thêm 5%.
+        </h1>
+      </div>
       {/* Phần header chính */}
       <div className="flex items-center w-full h-20 px-7 gap-x-10 justify-between md:justify-start">
         {/* Nút mở menu trên di động */}
@@ -82,14 +85,24 @@ const Header = () => {
           <span className="block w-8 h-1 bg-black my-1"></span>
         </button>
         {/* Logo trang web */}
-        <a href="/" className="flex items-center justify-center w-20 min-w-20 h-full -mb-2 mx-auto md:mx-0">
-          <img className="object-cover w-full" src="/logo.jpg" alt="logo" />
+        <a
+          href="/"
+          className="flex items-center justify-center w-20 min-w-20 h-full -mb-2 mx-auto md:mx-0"
+        >
+          <img
+            className="object-cover w-full"
+            src="/public/logo.jpg"
+            alt="logo"
+          />
         </a>
         {/* Nav chỉ hiển thị trên màn hình lớn */}
         <div className="hidden md:flex h-full flex-1 items-center justify-between gap-4">
           {/* Danh sách các nút điều hướng */}
           <nav className="flex items-center gap-x-8 list-none mr-auto">
-            <ButtonNav text={"Fidget Toys"} onClick={() => navigate("/category/:id")} />
+            <ButtonNav
+              text={"Fidget Toys"}
+              onClick={() => navigate("/category/:id")}
+            />
             <ButtonNav text={"Lego"} />
             <div className="relative group max-h-full">
               <ButtonNav
@@ -104,9 +117,30 @@ const Header = () => {
               <div className="absolute left-0 pt-2 z-50">
                 <div className="w-48 bg-white border border-gray-300 shadow-lg rounded-md opacity-0 group-hover:opacity-100 hidden group-hover:block transition-opacity duration-300">
                   <ul className="py-1">
-                    <li><a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Đồng giá 119k</a></li>
-                    <li><a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Đồng giá 219k</a></li>
-                    <li><a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Đồng giá 300k</a></li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        Đồng giá 119k
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        Đồng giá 219k
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      >
+                        Đồng giá 300k
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -115,8 +149,15 @@ const Header = () => {
           {/* Các icon chức năng (tìm kiếm, tài khoản, giỏ hàng) */}
           <nav className="flex items-center w-fit gap-x-8 list-none ml-auto">
             {/* Tìm kiếm */}
-            <div ref={wrapperRef} className="flex items-center justify-center relative size-fit">
-              <ButtonNav text={<IoIosSearch className="text-lg" onClick={toggleSearch} />} />
+            <div
+              ref={wrapperRef}
+              className="flex items-center justify-center relative size-fit"
+            >
+              <ButtonNav
+                text={
+                  <IoIosSearch className="text-lg" onClick={toggleSearch} />
+                }
+              />
               {isSearchOpen && <Search />}
             </div>
 
@@ -124,12 +165,27 @@ const Header = () => {
             {user ? (
               <p>{user.fullName}</p>
             ) : (
-              <div ref={wrapperRef} className="flex items-center justify-center relative size-fit">
-                <ButtonNav text={<FaUser className="text-lg" onClick={toggleMenu} />} />
+              <div
+                ref={wrapperRef}
+                className="flex items-center justify-center relative size-fit"
+              >
+                <ButtonNav
+                  text={<FaUser className="text-lg" onClick={toggleMenu} />}
+                />
                 {isOpen && (
                   <div className="absolute right-0 top-full w-48 bg-white rounded-md shadow-lg py-2 z-20">
-                    <Link to="/Signin" className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng nhập</Link>
-                    <Link to="/Signup" className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng ký</Link>
+                    <Link
+                      to="/Signin"
+                      className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Đăng nhập
+                    </Link>
+                    <Link
+                      to="/Signup"
+                      className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Đăng ký
+                    </Link>
                   </div>
                 )}
               </div>
@@ -137,13 +193,21 @@ const Header = () => {
 
             {/* Giỏ hàng */}
             <div className="flex items-center justify-center relative size-fit">
-              <ButtonNav text={<BsCart3 className="text-lg" onClick={toggleShowCart} />} />
+              <ButtonNav
+                text={<BsCart3 className="text-lg" onClick={toggleShowCart} />}
+              />
               {cart.length > 0 && (
                 <span className="absolute right-[-7px] top-0 bg-[#00a046] text-[12px] h-[10px] flex items-center justify-center px-[7px] py-[10px] rounded-full">
                   {cart.length}
                 </span>
               )}
-              {isShowCart && <Cart cart={cart} setCart={setCart} onHiddenCart={onHiddenCart} />}
+              {isShowCart && (
+                <Cart
+                  cart={cart}
+                  setCart={setCart}
+                  onHiddenCart={onHiddenCart}
+                />
+              )}
             </div>
           </nav>
         </div>
@@ -154,29 +218,70 @@ const Header = () => {
         <div className="md:hidden">
           <nav className="flex flex-col items-center justify-center">
             <nav className="flex gap-3 list-none">
-              <ButtonNav text={"Fidget Toys"} onClick={() => navigate("/")} className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" />
-              <ButtonNav text={"Lego"} className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" />
-              <ButtonNav text={"Accessories"} className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100" />
+              <ButtonNav
+                text={"Fidget Toys"}
+                onClick={() => navigate("/")}
+                className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              />
+              <ButtonNav
+                text={"Lego"}
+                className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              />
+              <ButtonNav
+                text={"Accessories"}
+                className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              />
             </nav>
             <div className="flex list-none p-3">
               {/* Tìm kiếm trong menu di động */}
-              <div ref={wrapperRef} className="flex items-center justify-center relative size-fit">
-                <ButtonNav text={<IoIosSearch className="text-lg mx-3" onClick={toggleSearch} />} />
+              <div
+                ref={wrapperRef}
+                className="flex items-center justify-center relative size-fit"
+              >
+                <ButtonNav
+                  text={
+                    <IoIosSearch
+                      className="text-lg mx-3"
+                      onClick={toggleSearch}
+                    />
+                  }
+                />
                 {isSearchOpen && <Search />}
               </div>
               {/* Tài khoản trong menu di động */}
-              <div ref={wrapperRef} className="flex items-center justify-center relative size-fit">
-                <ButtonNav text={<FaUser className="text-lg mx-3" onClick={toggleMenu} />} />
+              <div
+                ref={wrapperRef}
+                className="flex items-center justify-center relative size-fit"
+              >
+                <ButtonNav
+                  text={
+                    <FaUser className="text-lg mx-3" onClick={toggleMenu} />
+                  }
+                />
                 {isOpen && (
                   <div className="absolute right-0 top-full w-48 bg-white rounded-md shadow-lg py-2 z-20">
-                    <Link to="/Signin" className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng nhập</Link>
-                    <Link to="/Signup" className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng ký</Link>
+                    <Link
+                      to="/Signin"
+                      className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Đăng nhập
+                    </Link>
+                    <Link
+                      to="/Signup"
+                      className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Đăng ký
+                    </Link>
                   </div>
                 )}
               </div>
               {/* Giỏ hàng trong menu di động */}
               <div className="flex items-center justify-center relative size-fit">
-                <ButtonNav text={<BsCart3 className="text-lg" onClick={toggleShowCart} />} />
+                <ButtonNav
+                  text={
+                    <BsCart3 className="text-lg" onClick={toggleShowCart} />
+                  }
+                />
                 {cart.length > 0 && (
                   <span className="absolute right-[-7px] top-0 bg-[#00a046] text-[12px] h-[10px] flex items-center justify-center px-[7px] py-[10px] rounded-full">
                     {cart.length}

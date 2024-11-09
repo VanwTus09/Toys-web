@@ -3,14 +3,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base : '/Toys-web',
+  base: '/toys-web/', // Tên repo của bạn trên GitHub
+  publicDir: false, // Bỏ qua thư mục public .git
   build: {
     rollupOptions: {
-      external: [
-        '@fortawesome/fontawesome-svg-core',
-        '@fortawesome/free-solid-svg-icons',
-        '@fortawesome/react-fontawesome'
-      ],
+      external: ['**/.git/**'], // Bỏ qua tất cả các file trong .git
     },
   },
 });

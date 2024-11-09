@@ -4,11 +4,11 @@ const Slider = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const slides = [
-    "/lego.jpg",
-    "/lego3.jpg",
-    "/lego4.jpg",
-    "/lego5.jpg",
-    "/lego6.jpg",
+    "/public/lego.jpg",
+    "/public/lego3.jpg",
+    "/public/lego4.jpg",
+    "/public/lego5.jpg",
+    "/public/lego6.jpg",
   ];
 
   // Hàm chuyển slide tự động

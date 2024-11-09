@@ -13,6 +13,7 @@ import RelatedProducts from "../layouts/Recommended/RelatedProducts";
 const ProductDetailItem = ({ product }) => {
   const id = useParams();
   const { cart, setCart } = useContext(Context); // Sử dụng context để lấy giỏ hàng
+  
   // const [relatedProducts, setRelatedProducts] = useState([]);
   // const [ setError] = useState(null);
   useEffect(() => {
@@ -55,9 +56,9 @@ const ProductDetailItem = ({ product }) => {
       <div className="flex flex-col justify-center items-center lg:flex lg:flex-row lg:justify-between lg:items-start">
         <div className="w-full   flex flex-col lg:flex-row justify-center items-center lg:w-2/4 sm:w-3/4">
           {/* Hình ảnh chính */}
-          <div className="flex justify-center items-center   lg:w-9/12">
+          <div className="flex justify-center items-center lg:w-9/12">
             <img
-              className="w-full lg:w-45/8 object-cotain"
+              className="w-full lg:w-45/8 object-contain transform transition-transform duration-300 hover:scale-125"
               src={convertBase64toURL(product.images[0].buffer)}
               alt={product.name || "Product image"}
             />

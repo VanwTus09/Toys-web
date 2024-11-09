@@ -5,7 +5,7 @@ import { LiaBoxOpenSolid } from "react-icons/lia";
 const Banner = () => {
   return (
     <div className="py-6 px-10  ">
-      <img src="/banner_1.jpg" alt="banner" className="p-2" />
+      <img src="/public/banner_1.jpg" alt="banner" className="p-2" />
       <h1 className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 shadow-lg animate-pulse">
         HÃY ĐỂ CHÚNG TÔI LÀ BẠN ĐỒNG HÀNH CỦA TRẺ NHỎ
       </h1>

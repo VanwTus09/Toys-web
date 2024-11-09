@@ -1,21 +1,24 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const Payment = () => {
+  const [cartItems, setCartItems] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
   const [form, setForm] = useState({
-    name: 'Mai Xuân Nhân',
-    email: 'maixuannhan2004@gmail.com',
-    phone: '0868487465',
-    address: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
-    orderMethod: 'giao_hang_tai_nha',
-    payMethod: 'thanh_toan_khi_nhan_hang',
+    name: "Mai Xuân Nhân",
+    email: "maixuannhan2004@gmail.com",
+    phone: "0868487465",
+    address: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+    orderMethod: "giao_hang_tai_nha",
+    payMethod: "thanh_toan_khi_nhan_hang",
   });
 
   useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(savedCartItems);
     fetchProvinces();
   }, []);
 
@@ -29,31 +32,35 @@ const Payment = () => {
 
   const fetchProvinces = async () => {
     try {
-      const response = await fetch('dist/tinh_tp.json');
+      const response = await fetch("dist/tinh_tp.json");
       const data = await response.json();
       setProvinces(data);
     } catch (error) {
-      console.error('Error loading provinces:', error);
+      console.error("Error loading provinces:", error);
     }
   };
 
   const fetchDistricts = async (provinceCode) => {
     try {
-      const response = await fetch('dist/quan_huyen.json');
+      const response = await fetch("dist/quan_huyen.json");
       const data = await response.json();
-      setDistricts(Object.values(data).filter(d => d.parent_code === provinceCode));
+      setDistricts(
+        Object.values(data).filter((d) => d.parent_code === provinceCode)
+      );
     } catch (error) {
-      console.error('Error loading districts:', error);
+      console.error("Error loading districts:", error);
     }
   };
 
   const fetchCommunes = async (districtCode) => {
     try {
-      const response = await fetch('dist/xa_phuong.json');
+      const response = await fetch("dist/xa_phuong.json");
       const data = await response.json();
-      setCommunes(Object.values(data).filter(c => c.parent_code === districtCode));
+      setCommunes(
+        Object.values(data).filter((c) => c.parent_code === districtCode)
+      );
     } catch (error) {
-      console.error('Error loading communes:', error);
+      console.error("Error loading communes:", error);
     }
   };
 
@@ -63,162 +70,148 @@ const Payment = () => {
   };
 
   const validateForm = () => {
-    if (Object.values(form).some(value => !value)) {
-      alert('Vui lòng điền đầy đủ thông tin!');
+    if (Object.values(form).some((value) => !value)) {
+      alert("Vui lòng điền đầy đủ thông tin!");
     } else {
-      alert('Đặt hàng thành công!');
+      alert("Đặt hàng thành công!");
     }
+  };
+
+  // Tính tổng tiền giỏ hàng
+  const calculateTotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   return (
     <div className="flex flex-col md:flex-row p-6 bg-gray-100">
-      {/* Customer Information Section */}
+      {/* Phần nhập thông tin khách hàng */}
       <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
-        <div className="flex items-center border-b pb-4 mb-4">
-          <img
-            src="image/Avatar.jpg"
-            alt="Profile"
-            className="w-24 h-24 rounded-full border mr-4"
-          />
-          <div>
-            <h2 className="text-xl font-bold">MAI XUÂN NHÂN</h2>
-            <p className="text-gray-500">0868487465</p>
-          </div>
-        </div>
-        <form className="space-y-4">
-          <div>
-            <label className="font-bold">Tỉnh/Thành phố:</label>
-            <select
-              className="mt-1 block w-full p-2 border rounded-md"
-              value={selectedProvince}
-              onChange={(e) => setSelectedProvince(e.target.value)}
-            >
-              <option value="">Chọn tỉnh/thành phố</option>
-              {provinces.map((province) => (
-                <option key={province.code} value={province.code}>
-                  {province.name_with_type}
-                </option>
-              ))}
-            </select>
-          </div>
+        <h2 className="text-2xl font-bold mb-4">Thông tin khách hàng</h2>
 
-          <div>
-            <label className="font-bold">Quận/Huyện:</label>
-            <select
-              className="mt-1 block w-full p-2 border rounded-md"
-              value={selectedDistrict}
-              onChange={(e) => setSelectedDistrict(e.target.value)}
-            >
-              <option value="">Chọn quận/huyện</option>
-              {districts.map((district) => (
-                <option key={district.code} value={district.code}>
-                  {district.name_with_type}
-                </option>
-              ))}
-            </select>
-          </div>
+        {/* Các trường nhập thông tin */}
+        <label htmlFor="name" className="block mb-2">
+          Tên
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={form.name}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded mb-4"
+        />
 
-          <div>
-            <label className="font-bold">Xã/Phường:</label>
-            <select
-              className="mt-1 block w-full p-2 border rounded-md"
-              onChange={handleInputChange}
-              name="commune"
-            >
-              <option value="">Chọn xã/phường</option>
-              {communes.map((commune) => (
-                <option key={commune.code} value={commune.code}>
-                  {commune.name_with_type}
-                </option>
-              ))}
-            </select>
-          </div>
+        <label htmlFor="email" className="block mb-2">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={form.email}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded mb-4"
+        />
 
-          <div>
-            <label className="font-bold">Họ và tên:</label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleInputChange}
-              className="mt-1 block w-full p-2 border rounded-md"
-            />
-          </div>
+        <label htmlFor="phone" className="block mb-2">
+          Số điện thoại
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={form.phone}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded mb-4"
+        />
 
-          <div>
-            <label className="font-bold">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleInputChange}
-              className="mt-1 block w-full p-2 border rounded-md"
-            />
-          </div>
+        {/* Dropdown tỉnh */}
+        <label htmlFor="province" className="block mb-2">
+          Tỉnh
+        </label>
+        <select
+          id="province"
+          name="province"
+          value={selectedProvince}
+          onChange={(e) => setSelectedProvince(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Chọn tỉnh</option>
+          {provinces.map((province) => (
+            <option key={province.code} value={province.code}>
+              {province.name}
+            </option>
+          ))}
+        </select>
 
-          <div>
-            <label className="font-bold">Số điện thoại:</label>
-            <input
-              type="text"
-              name="phone"
-              value={form.phone}
-              onChange={handleInputChange}
-              className="mt-1 block w-full p-2 border rounded-md"
-            />
-          </div>
+        {/* Dropdown quận/huyện */}
+        <label htmlFor="district" className="block mt-4 mb-2">
+          Quận/Huyện
+        </label>
+        <select
+          id="district"
+          name="district"
+          value={selectedDistrict}
+          onChange={(e) => setSelectedDistrict(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Chọn quận/huyện</option>
+          {districts.map((district) => (
+            <option key={district.code} value={district.code}>
+              {district.name}
+            </option>
+          ))}
+        </select>
 
-          <div>
-            <label className="font-bold">Địa chỉ:</label>
-            <input
-              type="text"
-              name="address"
-              value={form.address}
-              onChange={handleInputChange}
-              className="mt-1 block w-full p-2 border rounded-md"
-            />
-          </div>
-        </form>
+        {/* Dropdown xã/phường */}
+        <label htmlFor="commune" className="block mt-4 mb-2">
+          Xã/Phường
+        </label>
+        <select
+          id="commune"
+          name="commune"
+          value={form.address}
+          onChange={handleInputChange}
+          className="w-full p-2 border border-gray-300 rounded"
+        >
+          <option value="">Chọn xã/phường</option>
+          {communes.map((commune) => (
+            <option key={commune.code} value={commune.name}>
+              {commune.name}
+            </option>
+          ))}
+        </select>
       </div>
 
-      {/* Product and Order Information Section */}
+      {/* Phần hiển thị giỏ hàng và thông tin đơn hàng */}
       <div className="w-full md:w-1/2 p-6">
-        <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-          <div className="flex items-center mb-4">
-            <img
-              src="mouse.png"
-              alt="Chuột Gaming"
-              className="w-20 h-20 rounded-lg border mr-4"
-            />
-            <div>
-              <h3 className="text-lg font-bold">Chuột Gaming có dây Havit M79 RGB</h3>
-              <span className="bg-green-400 text-white px-3 py-1 rounded-full text-sm">
-                Đã giao
-              </span>
-              <p className="text-red-500 font-bold">180.000đ</p>
+        <h2 className="text-2xl font-bold mb-4">Giỏ hàng</h2>
+        {cartItems.map((item) => (
+          <div key={item.id} className="bg-white p-4 rounded-lg shadow-md mb-4">
+            <div className="flex items-center mb-4">
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-20 h-20 rounded-lg border mr-4"
+              />
+              <div>
+                <h3 className="text-lg font-bold">{item.name}</h3>
+                <p className="text-red-500 font-bold">
+                  {(item.price * item.quantity).toLocaleString()}đ
+                </p>
+                <p className="text-gray-500">Số lượng: {item.quantity}</p>
+              </div>
             </div>
           </div>
-          {/* Repeat product details for each item */}
-        </div>
-
+        ))}
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-          <div className="flex justify-between">
-            <span className="text-gray-700">Tạm tính</span>
-            <span className="text-gray-700">500.000đ</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-700">Phí vận chuyển</span>
-            <span className="text-gray-700">500.000đ</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-700">Giảm giá</span>
-            <span className="text-gray-700">500.000đ</span>
-          </div>
-          <div className="flex justify-between border-t mt-4 pt-2">
-            <h2 className="text-xl font-bold">Tổng cộng</h2>
-            <h3 className="text-xl font-bold">500.000đ</h3>
-          </div>
+          <h3 className="text-lg font-bold">
+            Tổng tiền: {calculateTotal().toLocaleString()}đ
+          </h3>
         </div>
-
         <button
           onClick={validateForm}
           className="bg-red-500 text-white py-2 px-4 rounded w-full"

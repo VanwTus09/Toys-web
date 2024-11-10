@@ -77,5 +77,13 @@ Sử dụng các tính năng của React như Hooks và Context để quản lý
 - Link github Front-end : https://github.com/VanwTus09/Toys-web 
 - Link github Back-end : https://github.com/TTTHaiDuong/toy-kingdom-backend
 - Link Figma : https://www.figma.com/design/Ca5lUa9vLw8PZq3gYN991W/Untitled?node-id=0-1
+# Hướng dẫn sử dụng
+-  Cài đặt môi trường : Node.js,MongoDB, Git
+- Khởi tạo dự án : Tạo frontend bằng Vite + React bằng câu lệnh npm create vite@latest my-app -- --template react ,cd my-app,npm install
+- Chia cấu trúc thư mục cho hợp lý
+- Tạo thư mục backend : mkdir backend, cd backend,npm init -y
+- Cài đặt các package cần thiết : npm install express mongoose dotenv cors
+- Tạo models, cấu trúc backend , routes phù hợp
+- Kết nối frontend với backend qua API
 # Lời cảm ơn
 Nhóm chúng em xin chân thành cảm ơn thầy Nguyễn Mạnh Tuấn, chúc thầy sức khỏe và tất cả những điều tốt đẹp nhất !

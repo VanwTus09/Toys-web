@@ -74,8 +74,8 @@ Sử dụng các tính năng của React như Hooks và Context để quản lý
 - Quản lý môi trường:
 + Cấu hình file .env để quản lý các biến môi trường như API keys, database connection string khi deploy.
 # Các phần liên quan
-Link github Front-end : https://github.com/VanwTus09/Toys-web 
-Link github Back-end : https://github.com/TTTHaiDuong/toy-kingdom-backend
-Link Figma : https://www.figma.com/design/Ca5lUa9vLw8PZq3gYN991W/Untitled?node-id=0-1
+- Link github Front-end : https://github.com/VanwTus09/Toys-web 
+- Link github Back-end : https://github.com/TTTHaiDuong/toy-kingdom-backend
+- Link Figma : https://www.figma.com/design/Ca5lUa9vLw8PZq3gYN991W/Untitled?node-id=0-1
 # Lời cảm ơn
 Nhóm chúng em xin chân thành cảm ơn thầy Nguyễn Mạnh Tuấn, chúc thầy sức khỏe và tất cả những điều tốt đẹp nhất !

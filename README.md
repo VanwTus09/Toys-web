@@ -73,5 +73,6 @@ Sử dụng các tính năng của React như Hooks và Context để quản lý
 + Vite giúp giảm thời gian build và tối ưu hóa ứng dụng trước khi deploy lên Vercel.
 - Quản lý môi trường:
 + Cấu hình file .env để quản lý các biến môi trường như API keys, database connection string khi deploy.
+# Các phần liên quan
 # Lời cảm ơn
 Nhóm chúng em xin chân thành cảm ơn thầy Nguyễn Mạnh Tuấn, chúc thầy sức khỏe và tất cả những điều tốt đẹp nhất !
